@@ -101,8 +101,8 @@
 	.moon {
 		position: absolute;
 		font-size: calc(var(--circle-radius) - var(--gap));
-		top: var(--gap);
-		line-height: 1.3;
+		/* Emoji glyph alignment is ridiculous I swear to god */
+		top: 1.5px;
 	}
 
 	.sun {
