@@ -78,6 +78,7 @@
 	}
 
 	.toggle .bubble {
+		-webkit-appearance: none;
 		appearance: none;
 		cursor: pointer;
 		position: absolute;
