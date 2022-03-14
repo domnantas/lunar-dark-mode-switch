@@ -54,19 +54,29 @@
 		return lunarEmojiMap[phase];
 	};
 
-	let lunarPhaseEmoji = getLunarPhaseEmoji();
+	
+	const lunarPhaseEmoji = getLunarPhaseEmoji();
+
+	const getTwemojiUrl = (emoji) => `https://twemoji.maxcdn.com/v/latest/svg/${emoji.codePointAt(0).toString(16)}.svg`
+
+	let lunarPhaseTwemojiURL = getTwemojiUrl(lunarPhaseEmoji)
+
+	let sunTwemojiURL = getTwemojiUrl('☀️')
+
+	let earthTwemojiURL = getTwemojiUrl('🌍')
 </script>
 
 <label class="toggle" class:dark={$isDarkTheme}>
-	<div class="moon">{lunarPhaseEmoji}</div>
-	<div class="sun">☀️</div>
+	<img src={lunarPhaseTwemojiURL} alt="moon" class="moon"/>
+	<img src={sunTwemojiURL} alt="sun" class="sun"/>
 	<input type="checkbox" class="bubble" bind:checked={$isDarkTheme} />
+	<img src={earthTwemojiURL} alt="earth" class="earth" />
 </label>
 
 <style>
 	.toggle {
-		--circle-radius: 40px;
-		--gap: 4px;
+		--circle-radius: 60px;
+		--gap: 6px;
 		position: relative;
 		width: calc(2 * var(--circle-radius) + 2 * var(--gap));
 		height: calc(var(--circle-radius) + 2 * var(--gap));
@@ -80,30 +90,30 @@
 	.toggle .bubble {
 		-webkit-appearance: none;
 		appearance: none;
-		cursor: pointer;
-		position: absolute;
-		content: '';
-		margin: 0;
-		width: var(--circle-radius);
-		height: var(--circle-radius);
-		top: var(--gap);
-		left: var(--gap);
-		border-radius: var(--circle-radius);
-		background-color: var(--secondary-color);
-		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-		transition: 0.3s ease;
 	}
 
 	.toggle .bubble:checked {
 		transform: translateX(var(--circle-radius));
 	}
 
+	.earth {
+		position: absolute;
+		width: var(--circle-radius);
+		top: var(--gap);
+		left: var(--gap);
+		transition: 0.3s ease;
+	}
+
+	.bubble:checked + .earth  {
+		transform: translateX(var(--circle-radius));
+	}
+
 	.sun,
 	.moon {
 		position: absolute;
-		font-size: calc(var(--circle-radius) - var(--gap));
-		/* Emoji glyph alignment is ridiculous I swear to god */
-		top: 1.5px;
+		width: var(--circle-radius);
+		top: var(--gap);
+		transform: scale(0.8)
 	}
 
 	.sun {
