@@ -1,5 +1,6 @@
 <script>
 	import { isDarkTheme } from '$lib/stores/darkTheme';
+	import { Temporal } from '@js-temporal/polyfill';
 
 	const LUNAR_MONTH = 29.530588853;
 
@@ -54,16 +55,24 @@
 		return lunarEmojiMap[phase];
 	};
 
-	
-	const lunarPhaseEmoji = getLunarPhaseEmoji();
+	const getDaytimeEmoji = () => {
+		const currentUTCHour = Temporal.Now.plainTimeISO('UTC').hour
+
+		if (currentUTCHour < 8) return '🌏'
+		else if (currentUTCHour < 16) return '🌍'
+		return '🌎'
+	}
 
 	const getTwemojiUrl = (emoji) => `https://twemoji.maxcdn.com/v/latest/svg/${emoji.codePointAt(0).toString(16)}.svg`
 
-	let lunarPhaseTwemojiURL = getTwemojiUrl(lunarPhaseEmoji)
+
+	let lunarPhaseTwemojiURL = getTwemojiUrl(getLunarPhaseEmoji())
 
 	let sunTwemojiURL = getTwemojiUrl('☀️')
 
-	let earthTwemojiURL = getTwemojiUrl('🌍')
+	let earthTwemojiURL = getTwemojiUrl(getDaytimeEmoji())
+
+	
 </script>
 
 <label class="toggle" class:dark={$isDarkTheme}>
