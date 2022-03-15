@@ -8,8 +8,9 @@
 </main>
 
 <style>
-	:global(body) {
+	:global(body, html) {
 		margin: 0;
+		height: 100%;
 	}
 
 	:root {
@@ -25,7 +26,7 @@
 	}
 
 	main {
-		height: 100vh;
+		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
