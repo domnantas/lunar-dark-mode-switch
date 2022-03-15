@@ -79,7 +79,7 @@
 	<img src={lunarPhaseTwemojiURL} alt="moon" class="moon"/>
 	<img src={sunTwemojiURL} alt="sun" class="sun"/>
 	<input type="checkbox" class="bubble" bind:checked={$isDarkTheme} />
-	<div class="a">a</div>
+	<img src={earthTwemojiURL} alt="earth" class="earth" />
 </label>
 
 <style>
@@ -112,20 +112,6 @@
 	.bubble:checked + .earth  {
 		transform: translateX(var(--circle-radius));
 	}
-
-	.a {
-		display: block;
-		position: absolute;
-		width: var(--circle-radius);
-		top: var(--gap);
-		left: var(--gap);
-		transition: 0.3s ease;
-	}
-
-	.bubble:checked ~ .a  {
-		transform: translateX(var(--circle-radius));
-	}
-
 
 	.sun,
 	.moon {
