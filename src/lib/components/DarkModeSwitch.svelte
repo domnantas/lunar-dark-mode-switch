@@ -79,7 +79,6 @@
 	<img src={lunarPhaseTwemojiURL} alt="moon" class="moon"/>
 	<img src={sunTwemojiURL} alt="sun" class="sun"/>
 	<input type="checkbox" class="bubble" bind:checked={$isDarkTheme} />
-	<img src={earthTwemojiURL} alt="earth" class="earth" />
 	<div class="a">a</div>
 </label>
 
