@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { isDarkTheme } from '$lib/stores/darkTheme';
 	import { Temporal } from '@js-temporal/polyfill';
 
@@ -12,7 +12,7 @@
 	};
 
 	const getLunarAgePercent = (date = new Date()) => {
-		const normalize = (value) => {
+		const normalize = (value: number) => {
 			value = value - Math.floor(value);
 			if (value < 0) value = value + 1;
 			return value;
@@ -56,28 +56,26 @@
 	};
 
 	const getDaytimeEmoji = () => {
-		const currentUTCHour = Temporal.Now.plainTimeISO('UTC').hour
+		const currentUTCHour = Temporal.Now.plainTimeISO('UTC').hour;
 
-		if (currentUTCHour < 8) return '🌏'
-		else if (currentUTCHour < 16) return '🌍'
-		return '🌎'
-	}
+		if (currentUTCHour < 8) return '🌏';
+		else if (currentUTCHour < 16) return '🌍';
+		return '🌎';
+	};
 
-	const getTwemojiUrl = (emoji) => `https://twemoji.maxcdn.com/v/latest/svg/${emoji.codePointAt(0).toString(16)}.svg`
+	const getTwemojiUrl = (emoji: string): string =>
+		`https://twemoji.maxcdn.com/v/latest/svg/${emoji?.codePointAt(0)?.toString(16)}.svg`;
 
+	let lunarPhaseTwemojiURL = getTwemojiUrl(getLunarPhaseEmoji());
 
-	let lunarPhaseTwemojiURL = getTwemojiUrl(getLunarPhaseEmoji())
+	let sunTwemojiURL = getTwemojiUrl('☀️');
 
-	let sunTwemojiURL = getTwemojiUrl('☀️')
-
-	let earthTwemojiURL = getTwemojiUrl(getDaytimeEmoji())
-
-	
+	let earthTwemojiURL = getTwemojiUrl(getDaytimeEmoji());
 </script>
 
-<label class="toggle" class:dark={$isDarkTheme}>
-	<img src={lunarPhaseTwemojiURL} alt="moon" class="moon"/>
-	<img src={sunTwemojiURL} alt="sun" class="sun"/>
+<label class="toggle">
+	<img src={lunarPhaseTwemojiURL} alt="moon" class="moon" />
+	<img src={sunTwemojiURL} alt="sun" class="sun" />
 	<input type="checkbox" class="bubble" bind:checked={$isDarkTheme} />
 	<img src={earthTwemojiURL} alt="earth" class="earth" />
 </label>
@@ -109,7 +107,7 @@
 		transition: 0.3s ease;
 	}
 
-	.bubble:checked + .earth  {
+	.bubble:checked + .earth {
 		transform: translateX(var(--circle-radius));
 	}
 
@@ -118,7 +116,7 @@
 		position: absolute;
 		width: var(--circle-radius);
 		top: var(--gap);
-		transform: scale(0.8)
+		transform: scale(0.8);
 	}
 
 	.sun {

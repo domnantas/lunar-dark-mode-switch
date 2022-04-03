@@ -1,11 +1,12 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 import { browser } from '$app/env';
 
 const darkThemeLocalStorageKey = "isDarkTheme"
-const doesPreferDark = browser && window.matchMedia("(prefers-color-scheme: dark)").matches;
+const doesPreferDark: boolean =
+	browser && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 const isSavedDarkThemeExists = browser && !!localStorage.getItem(darkThemeLocalStorageKey);
-const isSavedDarkTheme = browser && localStorage.getItem(darkThemeLocalStorageKey) === "true";
+const isSavedDarkTheme = browser && localStorage.getItem(darkThemeLocalStorageKey) === 'true';
 
 const isInitialDarkTheme = isSavedDarkThemeExists ? isSavedDarkTheme : doesPreferDark;
 
