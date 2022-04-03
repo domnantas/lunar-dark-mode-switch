@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/env';
 
-const darkThemeLocalStorageKey = "isDarkTheme"
+const darkThemeLocalStorageKey = 'isDarkTheme';
 const doesPreferDark: boolean =
 	browser && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -12,8 +12,13 @@ const isInitialDarkTheme = isSavedDarkThemeExists ? isSavedDarkTheme : doesPrefe
 
 export const isDarkTheme = writable(isInitialDarkTheme);
 
-isDarkTheme.subscribe((value) => {
+isDarkTheme.subscribe((isDark) => {
 	if (browser) {
-		localStorage.setItem(darkThemeLocalStorageKey, String(value));
+		if (isDark) {
+			document.body.classList.add('dark');
+		} else {
+			document.body.classList.remove('dark');
+		}
+		localStorage.setItem(darkThemeLocalStorageKey, String(isDark));
 	}
 });

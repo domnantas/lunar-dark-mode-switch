@@ -7,7 +7,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%svelte.head%
 	</head>
+
 	<body>
+		<script>
+			const darkThemeLocalStorageKey = 'isDarkTheme';
+			const doesPreferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+			const isSavedDarkThemeExists = !!localStorage.getItem(darkThemeLocalStorageKey);
+			const isSavedDarkTheme = localStorage.getItem(darkThemeLocalStorageKey) === 'true';
+
+			const isInitialDarkTheme = isSavedDarkThemeExists ? isSavedDarkTheme : doesPreferDark;
+			if (isInitialDarkTheme) {
+				document.body.classList.add('dark');
+			}
+		</script>
 		%svelte.body%
 	</body>
 </html>

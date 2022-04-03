@@ -67,16 +67,14 @@
 		`https://twemoji.maxcdn.com/v/latest/svg/${emoji?.codePointAt(0)?.toString(16)}.svg`;
 
 	let lunarPhaseTwemojiURL = getTwemojiUrl(getLunarPhaseEmoji());
-
 	let sunTwemojiURL = getTwemojiUrl('☀️');
-
 	let earthTwemojiURL = getTwemojiUrl(getDaytimeEmoji());
 </script>
 
 <label class="toggle">
 	<img src={lunarPhaseTwemojiURL} alt="moon" class="moon" />
 	<img src={sunTwemojiURL} alt="sun" class="sun" />
-	<input type="checkbox" class="bubble" bind:checked={$isDarkTheme} />
+	<input type="checkbox" class="checkbox" bind:checked={$isDarkTheme} />
 	<img src={earthTwemojiURL} alt="earth" class="earth" />
 </label>
 
@@ -94,7 +92,7 @@
 		user-select: none;
 	}
 
-	.toggle .bubble {
+	.toggle .checkbox {
 		-webkit-appearance: none;
 		appearance: none;
 	}
@@ -107,7 +105,8 @@
 		transition: 0.3s ease;
 	}
 
-	.bubble:checked + .earth {
+	:global(.dark) .earth,
+	.checkbox:checked + .earth {
 		transform: translateX(var(--circle-radius));
 	}
 

@@ -1,9 +1,8 @@
 <script>
 	import DarkModeSwitch from '$lib/components/DarkModeSwitch.svelte';
-	import { isDarkTheme } from '$lib/stores/darkTheme';
 </script>
 
-<main class:dark={$isDarkTheme}>
+<main>
 	<DarkModeSwitch />
 </main>
 
@@ -13,14 +12,14 @@
 		height: 100%;
 	}
 
-	:root {
+	:global(:root) {
 		--background-color: #fcf8f9;
 		--foreground-color: #2e3232;
 		--primary-color: #ea5559;
 		--secondary-color: #e8e3dd;
 	}
 
-	main.dark {
+	:global(body.dark) {
 		--background-color: #2f3132;
 		--foreground-color: #fcf8f9;
 	}
